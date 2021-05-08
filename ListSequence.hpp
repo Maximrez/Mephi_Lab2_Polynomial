@@ -17,8 +17,16 @@ public:
             items.Append(list.Get(i));
     }
 
+    [[nodiscard]] int GetSize() const override {
+        return items.GetSize();
+    }
+
     void Resize(int size) override {
         items.Resize(size);
+    }
+
+    T &Get(int index) const override {
+        return items.Get(index);
     }
 
     T GetFirst() const override {
@@ -29,20 +37,12 @@ public:
         return items.GetLast();
     }
 
-    T &Get(int index) const override {
-        return items.Get(index);
-    }
-
     T operator[](int index) const override {
         return items[index];
     }
 
     T &operator[](int index) override {
         return items[index];
-    }
-
-    [[nodiscard]] int GetSize() const override {
-        return items.GetSize();
     }
 
     void Append(T &item) override {
@@ -57,11 +57,8 @@ public:
         items.InsertAt(item, index);
     }
 
-    Sequence<T> *GetSubsequence(int startIndex, int endIndex) override {
-        auto *sub = new ListSequence<T>;
-        for (int i = startIndex; i < endIndex; i++)
-            sub->Append(items[i]);
-        return sub;
+    void Print() const override {
+        items.Print();
     }
 
     Sequence<T> *Concat(Sequence<T> &list) override {
@@ -72,8 +69,11 @@ public:
         return concatenated;
     }
 
-    void Print() const override {
-        items.Print();
+    Sequence<T> *GetSubsequence(int startIndex, int endIndex) override {
+        auto *sub = new ListSequence<T>;
+        for (int i = startIndex; i < endIndex; i++)
+            sub->Append(items[i]);
+        return sub;
     }
 
     Sequence<T> *Clone() const override {

@@ -16,8 +16,16 @@ public:
             Append(list.Get(i));
     }
 
+    [[nodiscard]] int GetSize() const override {
+        return items.GetSize();
+    }
+
     void Resize(int size) override {
         items.Resize(size);
+    }
+
+    T &Get(int index) const override {
+        return items.Get(index);
     }
 
     T GetFirst() const override {
@@ -28,20 +36,12 @@ public:
         return items[items.GetSize() - 1];
     }
 
-    T &Get(int index) const override {
-        return items.Get(index);
-    }
-
     T operator[](int index) const override {
         return items[index];
     }
 
     T &operator[](int index) override {
         return items[index];
-    }
-
-    [[nodiscard]] int GetSize() const override {
-        return items.GetSize();
     }
 
     void Append(T &item) override {
@@ -66,24 +66,6 @@ public:
         for (int i = size; i > index; i--)
             items[i] = items[i - 1];
         items[index] = item;
-    }
-
-    Sequence<T> *GetSubsequence(int startIndex, int endIndex) override {
-        auto *sub = new ArraySequence<T>;
-        sub->items.Resize(endIndex - startIndex);
-        for (int i = startIndex; i < endIndex; i++)
-            sub->items[i - startIndex] = items[i];
-        return sub;
-    }
-
-    Sequence<T> *Concat(Sequence<T> &list) override {
-        auto *concatenated = new ArraySequence<T>;
-        concatenated->items.Resize(GetSize() + list.GetSize());
-        for (int i = 0; i < items.GetSize(); i++)
-            concatenated->items[i] = items[i];
-        for (int i = 0; i < list.GetSize(); i++)
-            concatenated->items[i + items.GetSize()] = list[i];
-        return concatenated;
     }
 
     void Print() const override {
@@ -112,6 +94,24 @@ public:
         if (zero)
             cout << 0;
         cout << endl;
+    }
+
+    Sequence<T> *Concat(Sequence<T> &list) override {
+        auto *concatenated = new ArraySequence<T>;
+        concatenated->items.Resize(GetSize() + list.GetSize());
+        for (int i = 0; i < items.GetSize(); i++)
+            concatenated->items[i] = items[i];
+        for (int i = 0; i < list.GetSize(); i++)
+            concatenated->items[i + items.GetSize()] = list[i];
+        return concatenated;
+    }
+
+    Sequence<T> *GetSubsequence(int startIndex, int endIndex) override {
+        auto *sub = new ArraySequence<T>;
+        sub->items.Resize(endIndex - startIndex);
+        for (int i = startIndex; i < endIndex; i++)
+            sub->items[i - startIndex] = items[i];
+        return sub;
     }
 
     Sequence<T> *Clone() const override {

@@ -14,12 +14,16 @@ public:
 
     explicit Polynomial(Sequence<T> *sequence) : coefficients(sequence->Clone()) {};
 
+    [[nodiscard]] int GetSize() const {
+        return coefficients->GetSize();
+    }
+
     void Resize(int size) {
         coefficients->Resize(size);
     }
 
-    [[nodiscard]] int GetSize() const {
-        return coefficients->GetSize();
+    T &Get(int index) const {
+        return (*coefficients)[index];
     }
 
     T GetFirst() const {
@@ -28,10 +32,6 @@ public:
 
     T GetLast() const {
         return coefficients->GetLast();
-    }
-
-    T &Get(int index) const {
-        return (*coefficients)[index];
     }
 
     T operator[](int index) const {

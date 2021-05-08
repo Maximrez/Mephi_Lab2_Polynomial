@@ -55,47 +55,8 @@ public:
         return last->value;
     }
 
-    T &Get(int index) const {
-        if (index < 0 || index >= GetSize())
-            throw out_of_range("Index out of range");
-        int j = 0;
-        for (Item<T> *i = first; i != nullptr; i = i->next) {
-            if (j == index)
-                return i->value;
-            j++;
-        }
-    }
-
-    T operator[](int index) const {
-        return Get(index);
-    }
-
-    T &operator[](int index) {
-        return Get(index);
-    }
-
     [[nodiscard]] int GetSize() const {
         return list_size;
-    }
-
-    void Append(T &item) {
-        auto *elem = new Item<T>(item, last, nullptr);
-        if (first == nullptr)
-            first = elem;
-        if (last != nullptr)
-            last->next = elem;
-        last = elem;
-        list_size++;
-    }
-
-    void Prepend(T &item) {
-        auto *elem = new Item<T>(item, nullptr, first);
-        if (first != nullptr)
-            first->prev = elem;
-        first = elem;
-        if (last == nullptr)
-            last = elem;
-        list_size++;
     }
 
     void Resize(int size) {
@@ -121,6 +82,45 @@ public:
         list_size = size;
     }
 
+    T &Get(int index) const {
+        if (index < 0 || index >= GetSize())
+            throw out_of_range("Index out of range");
+        int j = 0;
+        for (Item<T> *i = first; i != nullptr; i = i->next) {
+            if (j == index)
+                return i->value;
+            j++;
+        }
+    }
+
+    T operator[](int index) const {
+        return Get(index);
+    }
+
+    T &operator[](int index) {
+        return Get(index);
+    }
+
+    void Append(T &item) {
+        auto *elem = new Item<T>(item, last, nullptr);
+        if (first == nullptr)
+            first = elem;
+        if (last != nullptr)
+            last->next = elem;
+        last = elem;
+        list_size++;
+    }
+
+    void Prepend(T &item) {
+        auto *elem = new Item<T>(item, nullptr, first);
+        if (first != nullptr)
+            first->prev = elem;
+        first = elem;
+        if (last == nullptr)
+            last = elem;
+        list_size++;
+    }
+
     void InsertAt(T &item, int index) {
         if (index < 0 || index > GetSize())
             throw out_of_range("Index out of range");
@@ -137,7 +137,7 @@ public:
         list_size++;
     }
 
-    void Print() const{
+    void Print() const {
         int degree = 0;
         bool zero = true;
         for (Item<T> *i = first; i != nullptr; i = i->next) {
