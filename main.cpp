@@ -101,12 +101,22 @@ int main() {
 
     cout << endl << "Polynomial" << endl;
 
-    Polynomial<int> p(seq2_a);
-
-    seq2_a[1] = 0;
-
-    p.Print();
-
+//    int simple[2];
+//    simple[0] = 1;
+//    simple[1] = 1;
+//
+//    Polynomial<int> p(new ArraySequence<int>(simple, 2));
+//
+//    Polynomial<int> p2(p);
+//
+//    seq2_a[1] = 0;
+//
+//    p.Print();
+//
+//    p2.Print();
+//
+//    cout << p.CalculatingValue(1) << endl;
+//
 //    auto p_mul = p.MulPolynomial(p);
 //
 //    p_mul->Print();
@@ -114,9 +124,40 @@ int main() {
 //    auto p_sum = p.AddPolynomial(p);
 //    p_sum->Print();
 //
-//    auto p_mul = p_sum->MulScalar(3);
-//    p_mul->Print();
+//    auto p_mul1 = p_sum->MulScalar(3);
+//    p_mul1->Print();
+//
+//    auto p_comp = p_mul->Composition(p);
+//    p_comp->Print();
 
+    int simple[2];
+    simple[0] = 1;
+    simple[1] = 1;
+
+    Polynomial<int> p(new ListSequence<int>(simple, 2));
+
+    Polynomial<int> p2(p);
+
+    seq2_a[1] = 0;
+
+    p.Print();
+
+    p2.Print();
+
+    cout << p.CalculatingValue(1) << endl;
+
+    auto p_mul = p.MulPolynomial(p);
+
+    p_mul->Print();
+
+    auto p_sum = p.AddPolynomial(p);
+    p_sum->Print();
+
+    auto p_mul1 = p_sum->MulScalar(3);
+    p_mul1->Print();
+
+    auto p_comp = p_mul->Composition(p);
+    p_comp->Print();
 
     return 0;
 }

@@ -31,7 +31,7 @@ public:
             Append(list[i]);
     }
 
-    LinkedList(LinkedList<T> &list) {
+    LinkedList(const LinkedList<T> &list) {
         list_size = list.GetSize();
         for (Item<T> *i = list.first; i != nullptr; i = i->next) {
             auto *item = new Item<T>(i->value, last, nullptr);
@@ -112,7 +112,7 @@ public:
             last->next = nullptr;
         } else {
             while (old_size != size) {
-                auto *item = new Item<T>(NULL, last, nullptr);
+                auto *item = new Item<T>(0, last, nullptr);
                 last->next = item;
                 last = item;
                 old_size++;

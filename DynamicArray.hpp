@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <cstring>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ public:
             items[i] = list[i];
     }
 
-    DynamicArray(DynamicArray<T> &list) : list_size(list.list_size), items(list.items) {}
+    DynamicArray(const DynamicArray<T> &list) : list_size(list.list_size), items(list.items) {}
 
     [[nodiscard]] int GetSize() const {
         return list_size;
@@ -39,7 +40,6 @@ public:
         }
         list_size = size;
     }
-
 
     T &Get(int index) const {
         if (index < 0 || index >= list_size)
@@ -58,13 +58,6 @@ public:
             throw out_of_range("Index out of range");
         return items[index];
     }
-
-//    DynamicArray<T> &operator=(const DynamicArray<T> &list) {
-//        Resize(list.list_size);
-//        for (int i = 0; i < list_size; i++)
-//            items[i] = list[i];
-//        return *this;
-//    }
 
     ~DynamicArray<T>() = default;
 };

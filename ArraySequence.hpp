@@ -11,7 +11,10 @@ public:
 
     ArraySequence(T *list, int size) : items(list, size) {}
 
-    ArraySequence(ArraySequence<T> &list) : items(list.items) {}
+    ArraySequence(const ArraySequence<T> &list) : items() {
+        for (int i = 0; i < list.GetSize(); i++)
+            Append(list.Get(i));
+    }
 
     void Resize(int size) override {
         items.Resize(size);
@@ -109,6 +112,14 @@ public:
         if (zero)
             cout << 0;
         cout << endl;
+    }
+
+    Sequence<T> *Clone() const override {
+        auto *new_items = new ArraySequence<T>();
+        new_items->Resize(GetSize());
+        for (int i = 0; i < GetSize(); i++)
+            (*new_items)[i] = items.Get(i);
+        return new_items;
     }
 
     virtual ~ArraySequence<T>() = default;

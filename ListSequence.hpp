@@ -12,7 +12,10 @@ public:
 
     ListSequence(T *list, int size) : items(list, size) {}
 
-    ListSequence(ListSequence<T> &list) : items(list.items) {}
+    ListSequence(const ListSequence<T> &list) : items() {
+        for (int i = 0; i < list.GetSize(); i++)
+            items.Append(list.Get(i));
+    }
 
     void Resize(int size) override {
         items.Resize(size);
@@ -71,6 +74,13 @@ public:
 
     void Print() const override {
         items.Print();
+    }
+
+    Sequence<T> *Clone() const override {
+        auto *new_items = new ListSequence<T>();
+        for (int i = 0; i < GetSize(); i++)
+            new_items->Append(items.Get(i));
+        return new_items;
     }
 
     virtual ~ListSequence<T>() = default;

@@ -29,5 +29,7 @@ public:
 
     virtual void Print() const = 0;
 
+    virtual Sequence<T> *Clone() const = 0;
+
     virtual ~Sequence<T>() = default;
 };

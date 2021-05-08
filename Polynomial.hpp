@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cmath>
 #include "ListSequence.hpp"
 #include "ArraySequence.hpp"
 
@@ -9,9 +10,9 @@ template<class T>
 class Polynomial {
     Sequence<T> *coefficients;
 public:
-    Polynomial(Polynomial<T> &polynomial) : coefficients(polynomial.coefficients) {};
+    Polynomial(const Polynomial<T> &polynomial) : coefficients(polynomial.coefficients->Clone()) {};
 
-    explicit Polynomial(Sequence<T> &sequence) : coefficients(&sequence) {};
+    explicit Polynomial(Sequence<T> *sequence) : coefficients(sequence->Clone()) {};
 
     void Resize(int size) {
         coefficients->Resize(size);
@@ -82,18 +83,45 @@ public:
         if (polynomial.GetSize() == 0)
             return new Polynomial<T>(polynomial);
         auto *mulled = new Polynomial<T>(coefficients);
-        int size1 = GetSize();
-        int size2 = polynomial.GetSize();
-        int target_size = size1 + size2 - 1;
+        int target_size = GetSize() + polynomial.GetSize() - 1;
         mulled->Resize(target_size);
         for (int i = 0; i < target_size; i++)
-            (*mulled)[i] = NULL;
-        for (int i = 0; i < size1; i++) {
-            for (int j = 0; j < size2; j++) {
-                (*mulled)[i + j] = (*coefficients)[i] * polynomial[j];
+            (*mulled)[i] = 0;
+        for (int i = 0; i < GetSize(); i++) {
+            for (int j = 0; j < polynomial.GetSize(); j++) {
+                (*mulled)[i + j] += (*coefficients)[i] * polynomial[j];
             }
         }
         return mulled;
+    }
+
+    T CalculatingValue(T value) {
+        T result = 0;
+        for (int i = 0; i < GetSize(); ++i) {
+            T item = (*coefficients)[i];
+            result += item * pow(value, i);
+        }
+        return result;
+    }
+
+    Polynomial<T> *Composition(Polynomial<T> &polynomial) {
+        if (GetSize() == 0)
+            return new Polynomial<T>(polynomial);
+        if (polynomial.GetSize() == 0)
+            return this;
+        auto *composition = new Polynomial<T>(coefficients);
+        for (int i = 1; i < GetSize(); i++)
+            (*composition)[i] = 0;
+        for (int i = 1; i < GetSize(); i++) {
+            T item = (*coefficients)[i];
+            auto *composited = new Polynomial<T>(polynomial);
+            for (int j = 0; j < i - 1; j++) {
+                composited = composited->MulPolynomial(polynomial);
+            }
+            composited = composited->MulScalar(item);
+            composition = composition->AddPolynomial(*composited);
+        }
+        return composition;
     }
 
     ~Polynomial() = default;
