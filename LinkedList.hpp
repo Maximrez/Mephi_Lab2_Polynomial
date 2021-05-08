@@ -124,15 +124,20 @@ public:
     void InsertAt(T &item, int index) {
         if (index < 0 || index > GetSize())
             throw out_of_range("Index out of range");
-        Item<T> *i = first;
-        for (int j = 0; j < index - 1; j++)
-            i = i->next;
-        auto *elem = new Item<T>(item, i, i->next);
-        i->next = elem;
-        if (elem->next == nullptr) {
-            last = elem;
+        if (GetSize() == 0) {
+            first = new Item<T>(item, nullptr, nullptr);
+            last = new Item<T>(item, nullptr, nullptr);
         } else {
-            elem->next->prev = elem;
+            Item<T> *i = first;
+            for (int j = 0; j < index - 1; j++)
+                i = i->next;
+            auto *elem = new Item<T>(item, i, i->next);
+            i->next = elem;
+            if (elem->next == nullptr) {
+                last = elem;
+            } else {
+                elem->next->prev = elem;
+            }
         }
         list_size++;
     }

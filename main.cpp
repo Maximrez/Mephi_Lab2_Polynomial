@@ -1,8 +1,6 @@
-#include <chrono>
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "Polynomial.hpp"
 #include "tests.hpp"
 
 using namespace std;
@@ -34,9 +32,23 @@ int main() {
     const string file_name = "logs.txt";
     ofstream fout(file_name, ios_base::trunc);
     fout.close();
+
     write_results(test_create_int(), file_name, "TEST CREATE INT");
     write_results(test_create_double(), file_name, "TEST CREATE DOUBLE");
+
+    write_results(test_copy_int(), file_name, "TEST COPY INT");
+    write_results(test_copy_double(), file_name, "TEST COPY DOUBLE");
+
+    write_results(test_get_int(), file_name, "TEST GET INT");
+    write_results(test_get_double(), file_name, "TEST GET DOUBLE");
+
     write_results(test_append_int(), file_name, "TEST APPEND INT");
     write_results(test_append_double(), file_name, "TEST APPEND DOUBLE");
+
+    write_results(test_prepend_int(), file_name, "TEST PREPEND INT");
+    write_results(test_prepend_double(), file_name, "TEST PREPEND DOUBLE");
+
+    write_results(test_insert_int(), file_name, "TEST INSERT INT");
+    write_results(test_insert_double(), file_name, "TEST INSERT DOUBLE");
     return 0;
 }
