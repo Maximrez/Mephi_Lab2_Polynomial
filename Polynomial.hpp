@@ -124,5 +124,10 @@ public:
         return composition;
     }
 
+    Polynomial<T> &operator=(const Polynomial<T> *polynomial) {
+        coefficients = polynomial->coefficients->Clone();
+        return *this;
+    }
+
     ~Polynomial() = default;
 };

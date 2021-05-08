@@ -50,5 +50,18 @@ int main() {
 
     write_results(test_insert_int(), file_name, "TEST INSERT INT");
     write_results(test_insert_double(), file_name, "TEST INSERT DOUBLE");
+
+    write_results(test_add_int(), file_name, "TEST ADD INT");
+    write_results(test_add_double(), file_name, "TEST ADD DOUBLE");
+
+    write_results(test_mul_scalar_int(), file_name, "TEST MUL SCALAR INT");
+    write_results(test_mul_scalar_double(), file_name, "TEST MUL SCALAR DOUBLE");
+
+    write_results(test_mul_polynomial_int(), file_name, "TEST MUL POLYNOMIAL INT");
+    write_results(test_mul_polynomial_double(), file_name, "TEST MUL POLYNOMIAL DOUBLE");
+
+    write_results(test_composition_int(), file_name, "TEST COMPOSITION INT");
+    write_results(test_composition_double(), file_name, "TEST COMPOSITION DOUBLE");
+
     return 0;
 }

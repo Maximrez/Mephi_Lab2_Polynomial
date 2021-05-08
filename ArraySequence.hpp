@@ -73,14 +73,18 @@ public:
         for (int i = 0; i < GetSize(); ++i) {
             T value = items[i];
             if (value != 0) {
-                zero = false;
                 if (i == 0) {
                     cout << value;
                 } else {
-                    if (value < 0) {
-                        cout << " - ";
+                    if (zero) {
+                        if (value < 0)
+                            cout << " -";
                     } else {
-                        cout << " + ";
+                        if (value < 0) {
+                            cout << " - ";
+                        } else {
+                            cout << " + ";
+                        }
                     }
                     if (abs(value) != 1)
                         cout << abs(value);
@@ -89,6 +93,7 @@ public:
                         cout << "^" << i;
                     }
                 }
+                zero = false;
             }
         }
         if (zero)

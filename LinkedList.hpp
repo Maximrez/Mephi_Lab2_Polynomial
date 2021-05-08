@@ -148,14 +148,18 @@ public:
         for (Item<T> *i = first; i != nullptr; i = i->next) {
             T value = i->value;
             if (value != 0) {
-                zero = false;
                 if (degree == 0) {
                     cout << value;
                 } else {
-                    if (value < 0) {
-                        cout << " - ";
+                    if (zero) {
+                        if (value < 0)
+                            cout << " -";
                     } else {
-                        cout << " + ";
+                        if (value < 0) {
+                            cout << " - ";
+                        } else {
+                            cout << " + ";
+                        }
                     }
                     if (abs(value) != 1)
                         cout << abs(value);
@@ -164,6 +168,7 @@ public:
                         cout << "^" << degree;
                     }
                 }
+                zero = false;
             }
             degree++;
         }
