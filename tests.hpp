@@ -463,3 +463,51 @@ pair<int, int> test_composition_double(const int n) {
     assert(polynomial_a == polynomial_l);
     return {array_time, list_time};
 }
+
+pair<int, int> test_calculating_int(const int n) {
+    int values[n];
+    for (int i = 0; i < n; i++) {
+        values[i] = i + 1;
+    }
+    Polynomial<int> polynomial_a(new ArraySequence<int>(values, n));
+    Polynomial<int> polynomial_l(new ListSequence<int>(values, n));
+
+    int value = 10;
+
+    auto startTime = chrono::steady_clock::now();
+    int res_a = polynomial_a.CalculatingValue(value);
+    auto endTime = chrono::steady_clock::now();
+    int array_time = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
+
+    startTime = chrono::steady_clock::now();
+    int res_l = polynomial_l.CalculatingValue(value);
+    endTime = chrono::steady_clock::now();
+    int list_time = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
+
+    assert(res_a == res_l);
+    return {array_time, list_time};
+}
+
+pair<int, int> test_calculating_double(const int n) {
+    double values[n];
+    for (int i = 0; i < n; i++) {
+        values[i] = i + 1;
+    }
+    Polynomial<double> polynomial_a(new ArraySequence<double>(values, n));
+    Polynomial<double> polynomial_l(new ListSequence<double>(values, n));
+
+    double value = 10;
+
+    auto startTime = chrono::steady_clock::now();
+    double res_a = polynomial_a.CalculatingValue(value);
+    auto endTime = chrono::steady_clock::now();
+    int array_time = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
+
+    startTime = chrono::steady_clock::now();
+    double res_l = polynomial_l.CalculatingValue(value);
+    endTime = chrono::steady_clock::now();
+    int list_time = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
+
+    assert(res_a == res_l);
+    return {array_time, list_time};
+}

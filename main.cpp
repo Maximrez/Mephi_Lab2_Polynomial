@@ -14,8 +14,8 @@ int main() {
         switch (s1) {
             case 1: {
                 Polynomial<int> polynomial = create_polynomial_int();
-                int s2 = 0, index, item;
-                while (s2 != 9) {
+                int s2 = -1, index, item;
+                while (s2 != 0) {
                     cout << endl << "Your polynomial:" << endl;
                     polynomial.Print();
                     cout << endl << "Select the action with polynomial:" << endl
@@ -27,7 +27,8 @@ int main() {
                          << "6 - multiply by scalar" << endl
                          << "7 - multiply by polynomial" << endl
                          << "8 - composition" << endl
-                         << "9 - exit" << endl;
+                         << "9 - calculating value" << endl
+                         << "0 - exit" << endl;
                     cin >> s2;
                     switch (s2) {
                         case 1: {
@@ -96,6 +97,13 @@ int main() {
                             break;
                         }
                         case 9: {
+                            int value;
+                            cout << "value: ";
+                            cin >> value;
+                            cout << "result: " << polynomial.CalculatingValue(value) << endl;
+                            break;
+                        }
+                        case 0: {
                             break;
                         }
                         default: {
@@ -140,6 +148,9 @@ int main() {
 
                 write_results(test_composition_int(30), file_name, "TEST COMPOSITION INT (N=30)");
                 write_results(test_composition_double(30), file_name, "TEST COMPOSITION DOUBLE (N=30)");
+
+                write_results(test_calculating_int(10000), file_name, "TEST CALCULATING INT (N=10000)");
+                write_results(test_calculating_double(10000), file_name, "TEST CALCULATING DOUBLE (N=10000)");
 
                 cout << "Tests successfully saved to " << file_name << endl;
                 break;
