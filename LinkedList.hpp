@@ -130,6 +130,7 @@ public:
         } else {
             if (index == 0) {
                 auto *elem = new Item<T>(item, nullptr, first);
+                first->prev = elem;
                 first = elem;
             } else {
                 Item<T> *i = first;
