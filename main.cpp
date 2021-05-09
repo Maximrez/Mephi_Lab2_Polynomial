@@ -33,35 +33,35 @@ int main() {
     ofstream fout(file_name, ios_base::trunc);
     fout.close();
 
-    write_results(test_create_int(), file_name, "TEST CREATE INT");
-    write_results(test_create_double(), file_name, "TEST CREATE DOUBLE");
+    write_results(test_create_int(10000), file_name, "TEST CREATE INT (N=10000)");
+    write_results(test_create_double(10000), file_name, "TEST CREATE DOUBLE (N=10000)");
 
-    write_results(test_copy_int(), file_name, "TEST COPY INT");
-    write_results(test_copy_double(), file_name, "TEST COPY DOUBLE");
+    write_results(test_copy_int(10000), file_name, "TEST COPY INT (N=10000)");
+    write_results(test_copy_double(10000), file_name, "TEST COPY DOUBLE (N=10000)");
 
-    write_results(test_get_int(), file_name, "TEST GET INT");
-    write_results(test_get_double(), file_name, "TEST GET DOUBLE");
+    write_results(test_get_int(10000), file_name, "TEST GET INT (N=10000)");
+    write_results(test_get_double(10000), file_name, "TEST GET DOUBLE (N=10000)");
 
-    write_results(test_append_int(), file_name, "TEST APPEND INT");
-    write_results(test_append_double(), file_name, "TEST APPEND DOUBLE");
+    write_results(test_append_int(10000), file_name, "TEST APPEND INT (N=10000)");
+    write_results(test_append_double(10000), file_name, "TEST APPEND DOUBLE (N=10000)");
 
-    write_results(test_prepend_int(), file_name, "TEST PREPEND INT");
-    write_results(test_prepend_double(), file_name, "TEST PREPEND DOUBLE");
+    write_results(test_prepend_int(10000), file_name, "TEST PREPEND INT (N=10000)");
+    write_results(test_prepend_double(10000), file_name, "TEST PREPEND DOUBLE (N=10000)");
 
-    write_results(test_insert_int(), file_name, "TEST INSERT INT");
-    write_results(test_insert_double(), file_name, "TEST INSERT DOUBLE");
+    write_results(test_insert_int(10000), file_name, "TEST INSERT INT (N=10000)");
+    write_results(test_insert_double(10000), file_name, "TEST INSERT DOUBLE (N=10000)");
 
-    write_results(test_add_int(), file_name, "TEST ADD INT");
-    write_results(test_add_double(), file_name, "TEST ADD DOUBLE");
+    write_results(test_add_int(10000), file_name, "TEST ADD INT (N=10000)");
+    write_results(test_add_double(10000), file_name, "TEST ADD DOUBLE (N=10000)");
 
-    write_results(test_mul_scalar_int(), file_name, "TEST MUL SCALAR INT");
-    write_results(test_mul_scalar_double(), file_name, "TEST MUL SCALAR DOUBLE");
+    write_results(test_mul_scalar_int(10000), file_name, "TEST MUL SCALAR INT (N=10000)");
+    write_results(test_mul_scalar_double(10000), file_name, "TEST MUL SCALAR DOUBLE (N=10000)");
 
-    write_results(test_mul_polynomial_int(), file_name, "TEST MUL POLYNOMIAL INT");
-    write_results(test_mul_polynomial_double(), file_name, "TEST MUL POLYNOMIAL DOUBLE");
+    write_results(test_mul_polynomial_int(1000), file_name, "TEST MUL POLYNOMIAL INT (N=1000)");
+    write_results(test_mul_polynomial_double(1000), file_name, "TEST MUL POLYNOMIAL DOUBLE (N=1000)");
 
-    write_results(test_composition_int(), file_name, "TEST COMPOSITION INT");
-    write_results(test_composition_double(), file_name, "TEST COMPOSITION DOUBLE");
+    write_results(test_composition_int(30), file_name, "TEST COMPOSITION INT (N=30)");
+    write_results(test_composition_double(30), file_name, "TEST COMPOSITION DOUBLE (N=30)");
 
     return 0;
 }

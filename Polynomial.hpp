@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <limits>
 #include "ListSequence.hpp"
 #include "ArraySequence.hpp"
 
@@ -127,6 +128,23 @@ public:
     Polynomial<T> &operator=(const Polynomial<T> *polynomial) {
         coefficients = polynomial->coefficients->Clone();
         return *this;
+    }
+
+    friend bool operator==(const Polynomial<T> &polynomial1, const Polynomial<T> &polynomial2) {
+        if (polynomial1.GetSize() != polynomial2.GetSize()) {
+            return false;
+        } else {
+            for (int i = 0; i < polynomial1.GetSize(); i++) {
+                if (fabs(polynomial1[i] - polynomial2[i]) >= numeric_limits<double>::epsilon()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    friend bool operator!=(const Polynomial<T> &polynomial1, const Polynomial<T> &polynomial2) {
+        return !(polynomial1 == polynomial2);
     }
 
     ~Polynomial() = default;

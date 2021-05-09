@@ -128,15 +128,20 @@ public:
             first = new Item<T>(item, nullptr, nullptr);
             last = new Item<T>(item, nullptr, nullptr);
         } else {
-            Item<T> *i = first;
-            for (int j = 0; j < index - 1; j++)
-                i = i->next;
-            auto *elem = new Item<T>(item, i, i->next);
-            i->next = elem;
-            if (elem->next == nullptr) {
-                last = elem;
+            if (index == 0) {
+                auto *elem = new Item<T>(item, nullptr, first);
+                first = elem;
             } else {
-                elem->next->prev = elem;
+                Item<T> *i = first;
+                for (int j = 0; j < index - 1; j++)
+                    i = i->next;
+                auto *elem = new Item<T>(item, i, i->next);
+                i->next = elem;
+                if (elem->next == nullptr) {
+                    last = elem;
+                } else {
+                    elem->next->prev = elem;
+                }
             }
         }
         list_size++;
