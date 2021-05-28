@@ -40,36 +40,34 @@ Polynomial<int> create_polynomial_int() {
              << "1 - input from keyboard" << endl
              << "2 - create identity" << endl
              << "3 - create random" << endl;
-        if (n > 0) {
-            int s = 0, item = 1;
-            while ((s < 1) or (s > 3)) {
-                cin >> s;
-                switch (s) {
-                    case 1: {
-                        for (int i = 0; i < n; i++) {
-                            cout << "Input value: ";
-                            cin >> item;
-                            polynomial.Append(item);
-                        }
-                        break;
+        int s = 0, item = 1;
+        while ((s < 1) or (s > 3)) {
+            cin >> s;
+            switch (s) {
+                case 1: {
+                    for (int i = 0; i < n; i++) {
+                        cout << "Input value: ";
+                        cin >> item;
+                        polynomial.Append(item);
                     }
-                    case 2: {
-                        for (int i = 0; i < n; i++) {
-                            polynomial.Append(item);
-                        }
-                        break;
+                    break;
+                }
+                case 2: {
+                    for (int i = 0; i < n; i++) {
+                        polynomial.Append(item);
                     }
-                    case 3: {
-                        for (int i = 0; i < n; i++) {
-                            item = rand() % 100;
-                            polynomial.Append(item);
-                        }
-                        break;
+                    break;
+                }
+                case 3: {
+                    for (int i = 0; i < n; i++) {
+                        item = rand() % 100;
+                        polynomial.Append(item);
                     }
-                    default: {
-                        printf("Enter a number from the list!\n");
-                        break;
-                    }
+                    break;
+                }
+                default: {
+                    printf("Enter a number from the list!\n");
+                    break;
                 }
             }
         }
@@ -91,37 +89,35 @@ Polynomial<double> create_polynomial_double() {
              << "1 - input from keyboard" << endl
              << "2 - create identity" << endl
              << "3 - create random" << endl;
-        if (n > 0) {
-            int s = 0;
-            double item = 1.0;
-            while ((s < 1) or (s > 3)) {
-                cin >> s;
-                switch (s) {
-                    case 1: {
-                        for (int i = 0; i < n; i++) {
-                            cout << "Input value: ";
-                            cin >> item;
-                            polynomial.Append(item);
-                        }
-                        break;
+        int s = 0;
+        double item = 1.0;
+        while ((s < 1) or (s > 3)) {
+            cin >> s;
+            switch (s) {
+                case 1: {
+                    for (int i = 0; i < n; i++) {
+                        cout << "Input value: ";
+                        cin >> item;
+                        polynomial.Append(item);
                     }
-                    case 2: {
-                        for (int i = 0; i < n; i++) {
-                            polynomial.Append(item);
-                        }
-                        break;
+                    break;
+                }
+                case 2: {
+                    for (int i = 0; i < n; i++) {
+                        polynomial.Append(item);
                     }
-                    case 3: {
-                        for (int i = 0; i < n; i++) {
-                            item = (rand() % 1000) / 10;
-                            polynomial.Append(item);
-                        }
-                        break;
+                    break;
+                }
+                case 3: {
+                    for (int i = 0; i < n; i++) {
+                        item = (rand() % 1000) / 10;
+                        polynomial.Append(item);
                     }
-                    default: {
-                        printf("Enter a number from the list!\n");
-                        break;
-                    }
+                    break;
+                }
+                default: {
+                    printf("Enter a number from the list!\n");
+                    break;
                 }
             }
         }
